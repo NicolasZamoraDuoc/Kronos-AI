@@ -1,0 +1,47 @@
+# --- Secretos ---------------------------------------------------------------
+.env
+*.env
+!.env.example
+secretos/
+argos/ca/*.key
+argos/ca/*.pem
+argos/ca/*.crt
+orquestacion/n8n/credenciales/*.json
+
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Django / TEMIS ---------------------------------------------------------
+db.sqlite3
+/staticfiles/
+/media/
+temis/staticfiles/
+
+# --- Datos y volúmenes ------------------------------------------------------
+datos/
+volumenes/
+*.dump
+*.sql.gz
+
+# --- Virtualización ---------------------------------------------------------
+*.vdi
+*.vmdk
+*.iso
+*.ova
+
+# --- Evidencia pesada -------------------------------------------------------
+pruebas/evidencia/**/*.mp4
+pruebas/evidencia/**/*.mkv
+
+# --- Entornos de desarrollo -------------------------------------------------
+.idea/
+.vscode/
+.DS_Store
+*.swp

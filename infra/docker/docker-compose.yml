@@ -1,0 +1,68 @@
+services:
+  postgresql:
+    image: postgres:17-alpine
+    container_name: kronos-postgresql
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_ADMIN_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_ADMIN_PASSWORD}
+      TZ: America/Santiago
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d:ro
+    networks:
+      - kronos
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_ADMIN_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: kronos-n8n
+    restart: unless-stopped
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgresql
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: ${POSTGRES_ADMIN_USER}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_ADMIN_PASSWORD}
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      N8N_HOST: 0.0.0.0
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      N8N_WEBHOOK_URL: http://100.114.7.65:5678/
+      GENERIC_TIMEZONE: America/Santiago
+      TZ: America/Santiago
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_SECURE_COOKIE: "false"
+    ports:
+      - "100.114.7.65:5678:5678"
+    volumes:
+      - n8ndata:/home/node/.n8n
+    networks:
+      - kronos
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: kronos-mailhog
+    restart: unless-stopped
+    ports:
+      - "100.114.7.65:8025:8025"
+    networks:
+      - kronos
+
+volumes:
+  pgdata:
+    name: kronos_pgdata
+  n8ndata:
+    name: kronos_n8ndata
+
+networks:
+  kronos:
+    name: kronos_net

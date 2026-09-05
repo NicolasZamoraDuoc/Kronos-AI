@@ -1,0 +1,64 @@
+{
+  "name": "00-verificacion-conexion",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2fe5f25a-0650-4c2f-812e-b100fd620fb0",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT count(*) AS tickets FROM tickets;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "10fbd0ba-d47a-4d3c-89d0-4a322a517a3e",
+      "name": "Execute a SQL query",
+      "credentials": {
+        "postgres": {
+          "id": "2PTI3Ntp6Q482xwb",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "12d702f5-fadf-4852-963e-acd09976b157",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "41ec1f19c93480591707458aca5991356ae1c1a454362e619424d1711c59a43c"
+  },
+  "nodeGroups": [],
+  "id": "ZZwXWKsGPYHPb62C",
+  "tags": []
+}

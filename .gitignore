@@ -45,3 +45,5 @@ pruebas/evidencia/**/*.mkv
 .vscode/
 .DS_Store
 *.swp
+infra/docker/initdb/03_roles.sql
+infra/docker/.env

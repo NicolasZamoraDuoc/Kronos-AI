@@ -1,0 +1,42 @@
+-- ============================================================
+-- KRONOS AI · Roles con privilegios segregados
+-- Las contraseñas se sustituyen al arrancar desde el .env
+-- ============================================================
+
+-- ---------- Rol del orquestador ----------
+-- Puede insertar auditoría, jamás modificarla ni borrarla.
+CREATE ROLE kronos_n8n LOGIN PASSWORD 'CLAVE_N8N';
+
+GRANT CONNECT ON DATABASE kronos TO kronos_n8n;
+GRANT USAGE ON SCHEMA public TO kronos_n8n;
+
+GRANT SELECT, INSERT, UPDATE ON tickets           TO kronos_n8n;
+GRANT SELECT, INSERT, UPDATE ON cola_inferencia   TO kronos_n8n;
+GRANT SELECT, INSERT, UPDATE ON temporizadores    TO kronos_n8n;
+GRANT SELECT, INSERT         ON auditoria         TO kronos_n8n;
+GRANT SELECT, INSERT         ON cortacircuito     TO kronos_n8n;
+
+REVOKE UPDATE, DELETE ON auditoria     FROM kronos_n8n;
+REVOKE UPDATE, DELETE ON cortacircuito FROM kronos_n8n;
+REVOKE DELETE         ON tickets       FROM kronos_n8n;
+
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO kronos_n8n;
+GRANT EXECUTE ON FUNCTION fn_verificar_cadena() TO kronos_n8n;
+
+-- ---------- Rol del frontend ----------
+-- Estrictamente de solo lectura sobre el esquema del orquestador.
+CREATE ROLE kronos_frontend LOGIN PASSWORD 'CLAVE_FRONTEND';
+
+GRANT CONNECT ON DATABASE kronos TO kronos_frontend;
+GRANT USAGE ON SCHEMA public TO kronos_frontend;
+
+GRANT SELECT ON tickets, auditoria, cola_inferencia,
+                temporizadores, cortacircuito TO kronos_frontend;
+
+REVOKE INSERT, UPDATE, DELETE ON tickets, auditoria, cola_inferencia,
+                                 temporizadores, cortacircuito FROM kronos_frontend;
+
+GRANT EXECUTE ON FUNCTION fn_verificar_cadena() TO kronos_frontend;
+
+-- Esquema propio de TEMIS para sus decisiones humanas
+CREATE SCHEMA frontend AUTHORIZATION kronos_frontend;

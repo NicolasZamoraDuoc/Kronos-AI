@@ -1,0 +1,1 @@
+Pregunta clave: el problema es el DESTINO externo o el HOST interno? Si basta con bloquear la direccion externa, la accion recae sobre el destino. Si el host esta comprometido y hay que cortarle la salida, recae sobre el host. Si son varios hosts, sobre el segmento.

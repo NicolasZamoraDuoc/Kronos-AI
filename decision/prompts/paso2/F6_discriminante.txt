@@ -1,0 +1,1 @@
+Pregunta clave: se MODIFICO algo existente o se CREO algo nuevo? Si se modifico una configuracion, se restaura. Si se creo una tarea, clave o servicio para persistir, se suprime ese elemento.

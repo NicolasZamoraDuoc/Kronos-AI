@@ -1,0 +1,4 @@
+PB-F2-01 REGISTRAR Y CLASIFICAR ARTEFACTO. Elige este SOLO cuando la naturaleza del archivo es DESCONOCIDA: hash no catalogado, binario sin firmar del que no se sabe si es malicioso, artefacto pendiente de veredicto. Si la alerta ya afirma que el artefacto es malicioso, NO uses este playbook: ya no hay nada que clasificar.
+PB-F2-02 CUARENTENA DEL ARTEFACTO. Elige este cuando el archivo es MALICIOSO CONFIRMADO y esta en disco, pero NO se esta ejecutando. Palabras como malicioso, malware, ofuscado o carga util indican confirmacion. Se aisla el archivo conservandolo integro.
+PB-F2-03 TERMINAR EL PROCESO. Elige este cuando hay un PROCESO EN EJECUCION ahora y el problema se limita a ese proceso. Matarlo resuelve el incidente.
+PB-F2-04 AISLAR LA ESTACION DE LA RED. Elige este cuando el compromiso EXCEDE a un proceso: inyeccion en memoria, conexiones salientes del malware, cifrado masivo, multiples procesos, o agente de monitoreo deteriorado.

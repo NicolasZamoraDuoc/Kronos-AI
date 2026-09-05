@@ -1,0 +1,1 @@
+Dos preguntas clave. Primera: la cuenta afectada es de SERVICIO o de una persona? Si es de servicio, la respuesta es PB-F3-04. Segunda: el privilegio solo se OBTUVO o ya se USO para algo? Si solo se obtuvo, la revocacion es temporal.

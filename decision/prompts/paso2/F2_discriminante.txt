@@ -1,0 +1,1 @@
+Tres preguntas en orden. Primera: la alerta AFIRMA que es malicioso, o solo dice que es desconocido? Si lo afirma, descarta PB-F2-01. Segunda: hay algo ejecutandose o solo un archivo en disco? Tercera: si hay ejecucion, se limita a un proceso o excede a la estacion?

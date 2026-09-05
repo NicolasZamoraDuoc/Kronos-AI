@@ -1,0 +1,1 @@
+Tres preguntas en orden. Primera: cuantos titulares participan? Si son varios, es PB-F5-04. Segunda: que volumen tiene? Miles de registros o una base completa es concluyente, no sospechoso. Tercera: hay un mecanismo configurado para exfiltrar de forma sostenida, como un reenvio automatico? Eso tambien es concluyente.

@@ -18,6 +18,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
   n8n:
     image: n8nio/n8n:latest
     container_name: kronos-n8n
@@ -36,15 +37,30 @@ services:
       N8N_HOST: 0.0.0.0
       N8N_PORT: 5678
       N8N_PROTOCOL: http
+      N8N_SECURE_COOKIE: "false"
       N8N_WEBHOOK_URL: http://100.114.7.65:5678/
       GENERIC_TIMEZONE: America/Santiago
       TZ: America/Santiago
       N8N_DIAGNOSTICS_ENABLED: "false"
-      N8N_SECURE_COOKIE: "false"
     ports:
       - "100.114.7.65:5678:5678"
     volumes:
       - n8ndata:/home/node/.n8n
+    networks:
+      - kronos
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: kronos-ollama
+    restart: unless-stopped
+    environment:
+      OLLAMA_HOST: 0.0.0.0:11434
+      OLLAMA_KEEP_ALIVE: "24h"
+      OLLAMA_NUM_PARALLEL: "1"
+      OLLAMA_MAX_LOADED_MODELS: "1"
+      TZ: America/Santiago
+    volumes:
+      - ollamadata:/root/.ollama
     networks:
       - kronos
 
@@ -62,6 +78,8 @@ volumes:
     name: kronos_pgdata
   n8ndata:
     name: kronos_n8ndata
+  ollamadata:
+    name: kronos_ollamadata
 
 networks:
   kronos:

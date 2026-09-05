@@ -1,0 +1,38 @@
+Clasifica la alerta en UNA familia. Lee TODAS las definiciones antes de decidir.
+
+F1 ACCESO Y AUTENTICACION
+Obtener o usar credenciales indebidamente. Fuerza bruta, rociado de contrasenas,
+autenticaciones fallidas repetidas, login desde origen anomalo.
+NO uses F1 solo porque aparezca un nombre de cuenta.
+
+F2 CODIGO MALICIOSO Y EJECUCION
+Un PROCESO ejecutandose ahora. PowerShell ofuscado, binario sospechoso corriendo,
+inyeccion en memoria, artefacto descargado.
+Clave: hay ejecucion activa de codigo.
+
+F3 MOVIMIENTO LATERAL Y ESCALADA
+Desplazarse entre sistemas u obtener privilegios superiores. Cambios de pertenencia
+a grupos privilegiados, uso de cuentas de servicio fuera de su funcion, conexiones
+SMB o RDP anomalas entre equipos internos.
+Clave: privilegios o desplazamiento interno.
+
+F4 COMANDO, CONTROL Y TRAFICO ANOMALO
+Comunicacion con infraestructura EXTERNA del adversario. Balizas periodicas,
+dominios de mala reputacion, tunel DNS, trafico cifrado a destino desconocido.
+Clave: hay un destino externo.
+
+F5 EXFILTRACION Y FUGA DE DATOS
+SALIDA de informacion. Transferencia de registros, carga a almacenamiento externo,
+deteccion de datos personales saliendo.
+Clave: los datos abandonan la organizacion.
+
+F6 INTEGRIDAD Y CONFIGURACION
+PERSISTENCIA o alteracion de configuracion. Claves de ejecucion del registro,
+tareas programadas, servicios creados, cron, desactivacion de defensas, desviacion
+de linea base.
+Clave: el adversario deja algo instalado para sobrevivir al reinicio. Una tarea
+programada o una clave de registro son F6, aunque el binario sea malicioso.
+
+El campo confianza es decimal entre 0.0 y 1.0. NUNCA escala 0 a 100.
+
+ALERTA: {{alerta}}

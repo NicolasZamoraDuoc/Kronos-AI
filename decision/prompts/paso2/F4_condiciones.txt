@@ -1,0 +1,4 @@
+PB-F4-01 ENRIQUECER REPUTACION DEL DESTINO. Elige este cuando el destino externo es POCO FRECUENTE pero NO hay patron concluyente: una consulta aislada, un dominio nuevo sin balizas, trafico a un proveedor plausible.
+PB-F4-02 BLOQUEAR EL DESTINO EN EL GATEWAY. Elige este cuando el DESTINO esta confirmado como malicioso: reputacion negativa, balizas periodicas, generacion algoritmica de dominios, tunel DNS. La accion recae sobre una direccion externa, no sobre un titular.
+PB-F4-03 CORTAR LA SALIDA PROXIFICADA DEL HOST. Elige este cuando el problema es UN HOST CONCRETO con canal de control activo: descarga herramientas, mantiene comunicacion sostenida, tiene multiples canales. Se corta la salida de esa estacion.
+PB-F4-04 CORTAR LA SALIDA DE UN SEGMENTO COMPLETO. Elige este SOLO cuando VARIOS HOSTS del mismo segmento presentan el mismo patron. Un solo host comprometido NUNCA es PB-F4-04.

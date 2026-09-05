@@ -1,0 +1,4 @@
+PB-F3-01 ENRIQUECER MAPA DE SESIONES. Elige este cuando solo hay DESCUBRIMIENTO o ENUMERACION: consultas de grupos, listado de cuentas, exploracion de sistemas remotos. El adversario esta mirando, todavia no ha tomado nada.
+PB-F3-02 REVOCAR TEMPORALMENTE LA PERTENENCIA. Elige este cuando se DETECTA UN CAMBIO de pertenencia a grupo privilegiado que no fue autorizado, pero AUN NO se ha usado ese privilegio. El estado previo se conserva y se puede restituir.
+PB-F3-03 REVOCAR PERMANENTEMENTE LOS PRIVILEGIOS. Elige este cuando el privilegio elevado YA SE USO para acceder a recursos o desplazarse a otro sistema. Hay elusion de control de cuentas, suplantacion de token, o movimiento lateral confirmado.
+PB-F3-04 DESHABILITAR CUENTA DE SERVICIO. Elige este SOLO cuando la cuenta afectada es una CUENTA DE SERVICIO, identificable por su prefijo o por sustentar un proceso desatendido. Nunca lo elijas para una cuenta de persona.

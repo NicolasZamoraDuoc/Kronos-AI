@@ -1,0 +1,45 @@
+# Acotamiento del espacio de decisión del paso 2 según severidad de la alerta
+#
+# El filtro lo aplica código determinístico. El modelo solo elige entre los
+# playbooks que quedan. La proporcionalidad es una garantía estructural, no
+# una petición al modelo.
+#
+# Rangos según la escala de severidad de Wazuh (0 a 15).
+
+version: "1.0"
+
+rangos:
+  - desde: 0
+    hasta: 6
+    niveles_admitidos: [0]
+    descripcion: >
+      Severidad baja. Solo enriquecimiento. El sistema registra y clasifica
+      sin alterar el estado de ningún activo.
+
+  - desde: 7
+    hasta: 9
+    niveles_admitidos: [0, 1]
+    descripcion: >
+      Severidad media. Se admite contención reversible sobre activos de red,
+      con temporizador de reversión automática.
+
+  - desde: 10
+    hasta: 12
+    niveles_admitidos: [0, 1, 2]
+    descripcion: >
+      Severidad alta. Se admite contención sobre persona identificada, con
+      notificación obligatoria y reversión exclusivamente manual.
+
+  - desde: 13
+    hasta: 15
+    niveles_admitidos: [0, 1, 2, 3]
+    descripcion: >
+      Severidad crítica. Se admite proponer acciones sobre continuidad de
+      servicio, que en todo caso requieren aprobación humana previa.
+
+# Comportamiento ante severidad ausente o fuera de rango
+por_defecto:
+  niveles_admitidos: [0]
+  motivo: >
+    Ante severidad no interpretable, el sistema falla hacia el lado prudente:
+    solo enriquecimiento.

@@ -1,0 +1,4 @@
+PB-F5-01 REGISTRAR HALLAZGO. Elige este cuando la transferencia ocurre dentro del FLUJO DE TRABAJO NORMAL: formulario corporativo, destino autorizado, acceso del propio titular a sus datos. No hay indicio de salida indebida.
+PB-F5-02 RETENER TEMPORALMENTE. Elige este cuando la transferencia es SOSPECHOSA pero NO concluyente: un archivo suelto, pocos registros, destino no corporativo pero de uso plausible. Como referencia, menos de mil registros o un archivo individual.
+PB-F5-03 BLOQUEAR Y NOTIFICAR AL TITULAR. Elige este cuando la exfiltracion es CONCLUYENTE y atribuible a UN usuario. Indicadores: mas de mil registros, carga masiva, salida por canal de control, reenvio automatico configurado hacia el exterior, base de datos completa. Cualquier volumen de miles de registros es PB-F5-03, no PB-F5-02.
+PB-F5-04 SUSPENDER LA SALIDA PARA UN CONJUNTO. Elige este SOLO cuando participan MULTIPLES usuarios o estaciones. Un solo titular NUNCA es PB-F5-04.

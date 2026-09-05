@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "familia": {
+      "type": "string",
+      "enum": ["F1", "F2", "F3", "F4", "F5", "F6"]
+    },
+    "confianza": {
+      "type": "number"
+    }
+  },
+  "required": ["familia", "confianza"]
+}

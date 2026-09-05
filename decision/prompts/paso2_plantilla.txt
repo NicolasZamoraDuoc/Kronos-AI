@@ -1,0 +1,11 @@
+Selecciona el playbook de respuesta para esta alerta de la familia {{familia}}.
+
+Cada playbook tiene una CONDICION DE DISPARO. Verifica cual se cumple.
+
+{{condiciones}}
+
+{{discriminante}}
+
+El campo confianza es decimal entre 0.0 y 1.0. NUNCA escala 0 a 100.
+
+ALERTA: {{alerta}}

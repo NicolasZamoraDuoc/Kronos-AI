@@ -1,0 +1,121 @@
+<!--
+  KRONOS AI · Reglas de clasificación por familia de incidente
+  ============================================================
+  Estas reglas NO detectan: se apoyan en las reglas nativas de Wazuh
+  mediante if_sid y solo agregan dos cosas:
+    1. La etiqueta de familia (grupo kronos_Fx) que el orquestador lee.
+    2. Una severidad alineada con el mapa de acotamiento del paso 2.
+
+  MAPA DE SEVERIDAD (validacion/limites/mapa_severidad.yml)
+    0 a 6    solo Nivel 0, enriquecer
+    7 a 9    Niveles 0 y 1, contencion reversible
+    10 a 12  Niveles 0, 1 y 2, impacto sobre persona
+    13 a 15  todos, incluido Nivel 3 con aprobacion humana
+
+  Rangos de identificador
+    100100+  F1 Acceso y Autenticacion
+    100200+  F2 Codigo Malicioso y Ejecucion
+    100300+  F3 Movimiento Lateral y Escalada
+    100400+  F4 Comando, Control y Trafico Anomalo
+    100500+  F5 Exfiltracion y Fuga de Datos
+    100600+  F6 Integridad y Configuracion
+-->
+
+<group name="kronos,">
+
+  <!-- ================================================== F1 -->
+  <rule id="100100" level="5">
+    <if_sid>5710,5716,5760</if_sid>
+    <description>KRONOS F1: intento de autenticacion fallido aislado</description>
+    <group>kronos_F1,authentication_failed,</group>
+  </rule>
+
+  <rule id="100101" level="8">
+    <if_sid>5712,5720,5763</if_sid>
+    <description>KRONOS F1: fuerza bruta en curso desde origen identificable</description>
+    <group>kronos_F1,authentication_failures,</group>
+  </rule>
+
+  <rule id="100102" level="11">
+    <if_sid>5715,5501</if_sid>
+    <description>KRONOS F1: autenticacion exitosa tras patron de fuerza bruta</description>
+    <group>kronos_F1,authentication_success,</group>
+  </rule>
+
+  <rule id="100103" level="5">
+    <if_sid>60140,60141,60142,60143,60144</if_sid>
+    <description>KRONOS F1: evento de logon de Windows para enriquecimiento</description>
+    <group>kronos_F1,windows_logon,</group>
+  </rule>
+
+  <!-- ================================================== F2 -->
+  <rule id="100200" level="5">
+    <if_sid>92200,92202,92203</if_sid>
+    <description>KRONOS F2: artefacto creado en disco, naturaleza por determinar</description>
+    <group>kronos_F2,artefacto,</group>
+  </rule>
+
+  <rule id="100201" level="8">
+    <if_sid>92201</if_sid>
+    <description>KRONOS F2: artefacto malicioso confirmado escrito en disco</description>
+    <group>kronos_F2,artefacto_confirmado,</group>
+  </rule>
+
+  <rule id="100202" level="11">
+    <if_sid>92000,92001,92002,92003,92004,92005</if_sid>
+    <description>KRONOS F2: proceso sospechoso en ejecucion</description>
+    <group>kronos_F2,proceso,</group>
+  </rule>
+
+  <rule id="100203" level="12">
+    <if_sid>91803</if_sid>
+    <description>KRONOS F2: PowerShell con capacidad ofensiva confirmada</description>
+    <group>kronos_F2,powershell,</group>
+  </rule>
+
+  <!-- ================================================== F3 -->
+  <rule id="100300" level="5">
+    <if_sid>91805,91806,92103</if_sid>
+    <description>KRONOS F3: enumeracion o descubrimiento del directorio</description>
+    <group>kronos_F3,descubrimiento,</group>
+  </rule>
+
+  <rule id="100301" level="8">
+    <if_sid>60145,60146,60147</if_sid>
+    <description>KRONOS F3: cambio de pertenencia a grupo privilegiado</description>
+    <group>kronos_F3,privilegios,</group>
+  </rule>
+
+  <rule id="100302" level="11">
+    <if_sid>92102</if_sid>
+    <description>KRONOS F3: actividad RPC o DCOM sospechosa, posible movimiento lateral</description>
+    <group>kronos_F3,lateral,</group>
+  </rule>
+
+  <!-- ================================================== F4 -->
+  <rule id="100400" level="5">
+    <if_sid>92101</if_sid>
+    <description>KRONOS F4: comunicacion saliente por determinar</description>
+    <group>kronos_F4,trafico,</group>
+  </rule>
+
+  <rule id="100401" level="11">
+    <if_sid>92104</if_sid>
+    <description>KRONOS F4: binario sospechoso con conexion a destino externo</description>
+    <group>kronos_F4,c2,</group>
+  </rule>
+
+  <!-- ================================================== F6 -->
+  <rule id="100600" level="5">
+    <if_sid>92300,92302</if_sid>
+    <description>KRONOS F6: modificacion de registro, posible cambio administrativo</description>
+    <group>kronos_F6,registro,</group>
+  </rule>
+
+  <rule id="100601" level="11">
+    <if_sid>92301,92303</if_sid>
+    <description>KRONOS F6: mecanismo de persistencia creado por proceso no reconocido</description>
+    <group>kronos_F6,persistencia,</group>
+  </rule>
+
+</group>
